@@ -1,0 +1,7 @@
+# Python env
+.venv/
+
+## Result from generating .exe with pyinstaller
+*.spec
+build/
+dist/

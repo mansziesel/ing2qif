@@ -11,8 +11,12 @@ It's based around the Dutch ING statements.
 
 Usage:
 ------
+From windows folder(no python required):
+*Drag .csv file with ING structure on top of .exe. This will produce a qif file with the same name as the csv.
 
- $ python ing2qif.py statements.csv > statements.qif
+From CMD:
+
+ $ python ing2qif.py statements.csv
 
 * Note: This was designed around statements from ING in The Netherlands.
 
