@@ -11,10 +11,12 @@ import csv
 import argparse
 import sys
 
+
 class Entry:
     """
     I represent one entry.
     """
+
     def __init__(self, data):
         self._data = data
         self._clean_up()
@@ -35,7 +37,6 @@ class Entry:
         if item not in self._data:
             raise KeyError(f"Key '{item}' not found in entry data. Available keys: {self._data.keys()}")
         return self._data[item]
-
 
 
 class CsvEntries:
@@ -78,24 +79,24 @@ class QifEntry:
     def processing(self, data):
         # Add date
         data.append(f"D{self._date_format(self._entry['Datum'])}")  # Use the formatted date
-        
+
         # Add amount (formatted)
         data.append(f"T{self._amount_format()}")
 
         # Add amount (formatted)
         data.append(f"U{self._amount_format()}")
-        
+
         # Add payee (P line with the contents of 'Naam / Omschrijving')
         data.append(f"P{self._entry['Naam / Omschrijving']}")
-        
+
         # Add memo
-        data.append(f"M{self._memo()}") 
+        data.append(f"M{self._memo()}")
 
         # Add Cc line
         data.append("Cc")  # Always add "Cc" line
-        
+
         # Add transaction type if available
-        #if self._entry_type():
+        # if self._entry_type():
         #    data.append(f'N{self._entry_type()}')
 
         # Add N line
@@ -216,17 +217,17 @@ def main(filedescriptor, start, number, input_filename):
             qif.add_entry(entry)
             if number and c > start + number - 2:
                 break
-    
+
     # Generate output filename by replacing .csv with .qif
     if input_filename.endswith(".csv"):
         output_file = input_filename[:-4] + ".qif"
     else:
         output_file = input_filename + ".qif"
-    
+
     # Write the serialized QIF data to the output file with UTF-8 encoding
     with open(output_file, 'w', encoding='utf-8') as out_fd:
         out_fd.write(qif.serialize())
-    
+
     print(f"QIF data written to {output_file}")
 
 
