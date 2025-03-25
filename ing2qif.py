@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-# (C) 2014, Marijn Vriens <marijn@metronomo.cl> 
+# (C) 2014, Marijn Vriens <marijn@metronomo.cl>
 # GNU General Public License, version 3 or any later version
-# Small addition by Steven Jelsma
+# Small additions by Steven Jelsma and Mans Ziesel
 
 # Documents
 # https://github.com/Gnucash/gnucash/blob/master/src/import-export/qif-imp/file-format.txt
@@ -187,8 +187,8 @@ class QifEntry:
             return "-" + self._entry['amount']
         
     def _date_format(self, date_str):
-        """Convert date from YYYYMMDD to MM/DD/YYYY format."""
-        return f"{date_str[4:6]}/{date_str[6:8]}/{date_str[0:4]}"
+        """Convert date from YYYYMMDD to DD/MM/YYYY format."""
+        return f"{date_str[6:8]}/{date_str[4:6]}/{date_str[0:4]}"
 
     def _entry_type(self):
         """
